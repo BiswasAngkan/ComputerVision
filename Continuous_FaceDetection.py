@@ -15,12 +15,12 @@ camera = cv2.VideoCapture(0)
 for i in range(100):
 	_, picture = camera.read()					#	Take a picture
 
-	faces = model.detectMultiScale(picture, 1.3, 5)
+	faces = model.detectMultiScale(picture)
 
 	for x, y, w, h  in faces:
 		cv2.rectangle(picture, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
 	cv2.imshow("MyFace", picture)	
-	cv2.waitKey(10)							#	Hold display window for a while
+	cv2.waitKey(1)							#	Hold display window for a while
 
 camera.release()
