@@ -8,21 +8,17 @@
 
 import cv2
 
-# Load pre-trained model
-model = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml') 
+model = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml') # Load pre-trained model
 
 camera = cv2.VideoCapture(0)
-_, picture = camera.read()					#	Take a picture
+_, picture = camera.read()								     # Take a picture
+
+faces = model.detectMultiScale(picture)
+
+for x,y,w,h in faces:  
+	cv2.rectangle(picture, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
 cv2.imshow("MyFace", picture)	
-cv2.waitKey(0)							#	Hold display window for a while
-
-faces = model.detectMultiScale(picture, 1.3, 5)
-
-x, y, w, h  = faces[0] 
-cv2.rectangle(picture, (x, y), (x + w, y + h), (255, 0, 0), 2)
-
-cv2.imshow("MyFace", picture)	
-cv2.waitKey(0)							#	Hold display window for a while
+cv2.waitKey(0)										     # Hold display window untill a key press
 
 camera.release()
